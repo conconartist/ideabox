@@ -16,7 +16,7 @@ button {
 h1 {
   font-size: 18px;
   margin-top: 10px;
-  margin-left: .4em;
+  margin-left: 0.4em;
 }
 
 h2 {
@@ -26,27 +26,52 @@ h2 {
 }
 
 img {
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
 }
 
 input {
-  /* max-width: 50%;
-  min-width: 332px; */
+  /* max-width: 50%; */
+  /* min-width: 332px; */
   height: 2.5em;
-  width: 100%;
+  width: 98%;
   border: solid #5356A4 1.5px;
 }
 
+.card-body {
+  border: solid #1F1E3D 1px;
+  height: 180px;
+  padding: 0px 18px 0px 18px;
+  width: 207px;
+}
+
 .card-footer {
+  align-items: center;
+  background-color: #5356A4;
+  border: solid #1F1E3D 1px;
+  color: #FFFFFF;
   display: flex;
+  font-weight: bold;
+  height: 36px;
+  justify-content: flex-start;
+  padding: 2px;
+}
+
+.card-header {
+  align-items: center;
+  background-color: #1F1E3D;
+  color: #1F1F3D;
+  display: flex;
+  height: 36px;
+  justify-content: space-between;
+  padding: 4px;
 }
 
 .container-search {
   display: flex;
   /* max-width: 50%;
   min-width: 332px; */
-  width: 102%;
+  width: 100%;
 }
 
 .container-user-form {
@@ -54,10 +79,16 @@ input {
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 1.5em;
+  width: 50%;
 }
 
 .idea-card {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
   height: 265px;
+  justify-content: space-between;
+  margin: 20px;
   width: 245px;
 }
 
@@ -102,6 +133,10 @@ input {
   align-items: center;
 }
 
+#add-comment {
+  margin: 0px;
+}
+
 #button-save {
   background-color: #353567;
   border-color: #5C5FA8;
@@ -109,7 +144,7 @@ input {
   margin-bottom: 1.5em;
   /* max-width: 50%;
   min-width: 340px; */
-  width: 102%;
+  width: 100%;
 }
 
 #button-search {
@@ -117,14 +152,22 @@ input {
   border-color: #5C5FA8;
   color: #FFFFFF;
   width: 1.5em;
-  height: 1.5em;
+  height: 1.4em;
   padding: 0.5em;
 }
 
 #button-starred {
-  min-width: 190px;
   margin: .4em;
   border: none;
+}
+
+#card-body-text {
+  font-size: 18px;
+}
+
+#comment-logo {
+  height: 30px;
+  width: 30px;
 }
 
 #input-body {
@@ -132,7 +175,7 @@ input {
 }
 
 #input-search {
-  min-width: 292px;
+  /* width: 100%; */
 }
 
 #menu-bar-filter {
