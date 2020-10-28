@@ -8,13 +8,16 @@ class Idea {
 
   saveToStorage() {
     // this.star = true
+    // add to localStorage
   }
 
   deleteFromStorage() {
     // this.star = false
+    // remove from localStorage
   }
 
-  updateIdea() {
-
+  updateIdea(newTitle, newBody) {
+    this.title = newTitle;
+    this.body = newBody;
   }
 }

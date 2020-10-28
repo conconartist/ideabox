@@ -19,8 +19,9 @@
           <h2>Title</h2>
           <input id="input-title" type="text" name="" value="">
           <h2>Body</h2>
-          <input id="input-body" type="text" name="" value="">
-          <button id="button-save" type="button" name="button">Save</button>
+          <textarea id="input-body" name="name" wrap="soft"></textarea>
+          <!-- <input id="input-body" type="text" name="" value=""> -->
+          <button disabled id="button-save" type="button" name="button">Save</button>
           <div class="container-search">
             <img id="button-search" src="./assets/search.svg" alt="">
             <input id="input-search" type="text" name="" value="" placeholder="Search ideas">
@@ -30,8 +31,8 @@
       <section class="user-ideas wrapper">
         <section class="idea-card">
           <div class="card-header">
-            <img src="./assets/star.svg" alt="">
-            <img src="./assets/delete.svg" alt="">
+            <img id="icon-star" src="./assets/star.svg" alt="">
+            <img id="icon-delete" src="./assets/delete.svg" alt="">
           </div>
           <div class="card-body">
             <h3>Idea title</h3>

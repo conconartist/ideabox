@@ -6,11 +6,17 @@ body,html {
 }
 
 button {
-  font-size: 16px;
   color: #E9E9F3;
-  background-color: #5356A4;
+  cursor: pointer;
   border-color: #353567;
+  font-size: 16px;
   height: 40px;
+}
+
+button:disabled {
+  background-color: #D1C4E9 !important;
+  border: solid #B39DDB 1px !important;
+  cursor: default !important;
 }
 
 h1 {
@@ -31,11 +37,9 @@ img {
 }
 
 input {
-  /* max-width: 50%; */
-  /* min-width: 332px; */
+  border: solid #5356A4 1.5px;
   height: 2.5em;
   width: 98%;
-  border: solid #5356A4 1.5px;
 }
 
 .card-body {
@@ -157,8 +161,9 @@ input {
 }
 
 #button-starred {
-  margin: .4em;
+  background-color: #5356A4;
   border: none;
+  margin: .4em;
 }
 
 #card-body-text {
@@ -171,7 +176,10 @@ input {
 }
 
 #input-body {
+  border: solid #5356A4 1.5px;
+  font-family: inherit;
   height: 5.5em;
+  width: 100%;
 }
 
 #input-search {

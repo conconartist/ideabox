@@ -10,12 +10,26 @@ var saveButton = document.querySelector('#button-save')
 
 // event listeners
 
-saveButton.addEventListener('click', storeNewIdea)
+saveButton.addEventListener('click', saveNewIdea)
+inputBody.addEventListener('keyup', enableSaveButton)
+inputTitle.addEventListener('keyup', enableSaveButton)
 
 // functions
 
-function storeNewIdea() {
-  var newIdea = new Idea(inputTitle.value, inputBody.value)
+function saveNewIdea() {
+  var newIdea = new Idea(inputTitle.value, inputBody.textarea)
   ideaArray.push(newIdea)
-  console.log(ideaArray);
+  
+  clearInputFields()
+}
+
+function enableSaveButton() {
+  if (inputTitle.value !== '' && inputBody.value !== '') {
+    saveButton.disabled = false
+  }
+}
+
+function clearInputFields() {
+  inputTitle.value = ''
+  inputBody.textarea = ''
 }
