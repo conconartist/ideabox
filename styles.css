@@ -13,12 +13,6 @@ button {
   height: 40px;
 }
 
-button:disabled {
-  background-color: #D1C4E9 !important;
-  border: solid #B39DDB 1px !important;
-  cursor: default !important;
-}
-
 h1 {
   font-size: 18px;
   margin-top: 10px;
@@ -42,11 +36,19 @@ input {
   width: 98%;
 }
 
+.add-comment {
+  margin: 0px;
+}
+
 .card-body {
   border: solid #1F1E3D 1px;
   height: 180px;
   padding: 0px 18px 0px 18px;
   width: 207px;
+}
+
+.card-body-text {
+  font-size: 18px;
 }
 
 .card-footer {
@@ -71,17 +73,20 @@ input {
   padding: 4px;
 }
 
+.comment-logo {
+  height: 30px;
+  width: 30px;
+}
+
 .container-search {
   display: flex;
-  /* max-width: 50%;
-  min-width: 332px; */
   width: 100%;
 }
 
 .container-user-form {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-bottom: 1.5em;
   width: 50%;
 }
@@ -104,20 +109,20 @@ input {
   background-color: #1F1F3D;
   border-right: solid #EAEAF4 2px;
   color: #FFFFFF;
-  width: 24%;
-  min-width: 190px;
   height: 100%;
+  min-width: 190px;
   padding: 0.5em;
+  width: 24%;
 }
 
 .menu-filter-border {
   border-bottom: solid #353567 2px;
   border-top: solid #353567 2px;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 25px;
   margin-top: 18px;
   padding-bottom: 28px;
-  display: flex;
-  flex-direction: column;
 }
 
 .user-form {
@@ -132,13 +137,9 @@ input {
 }
 
 .wrapper {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-#add-comment {
-  margin: 0px;
 }
 
 #button-save {
@@ -146,33 +147,28 @@ input {
   border-color: #5C5FA8;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
-  /* max-width: 50%;
-  min-width: 340px; */
   width: 100%;
+}
+
+#button-save:disabled {
+  background-color: #D1C4E9;
+  border: solid #B39DDB 1px;
+  cursor: default;
 }
 
 #button-search {
   background-color: #353567;
   border-color: #5C5FA8;
   color: #FFFFFF;
-  width: 1.5em;
   height: 1.4em;
   padding: 0.5em;
+  width: 1.5em;
 }
 
 #button-starred {
   background-color: #5356A4;
   border: none;
   margin: .4em;
-}
-
-#card-body-text {
-  font-size: 18px;
-}
-
-#comment-logo {
-  height: 30px;
-  width: 30px;
 }
 
 #input-body {
@@ -182,12 +178,8 @@ input {
   width: 100%;
 }
 
-#input-search {
-  /* width: 100%; */
-}
-
 #menu-bar-filter {
+  color: #BFBFDD;
   margin-left: 0.4em;
   margin-bottom: 18px;
-  color: #BFBFDD;
 }
