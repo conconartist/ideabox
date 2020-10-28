@@ -26,8 +26,8 @@ h2 {
 }
 
 img {
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
 }
 
 input {
@@ -38,8 +38,33 @@ input {
   border: solid #5356A4 1.5px;
 }
 
+.card-body {
+  border: solid #1F1E3D 1px;
+  height: 180px;
+  padding: 0px;
+  width: 245px;
+}
+
 .card-footer {
+  align-items: center;
+  background-color: #5356A4;
+  border: solid #1F1E3D 1px;
+  color: #FFFFFF;
   display: flex;
+  font-weight: bold;
+  height: 36px;
+  justify-content: flex-start;
+  padding: 2px;
+}
+
+.card-header {
+  align-items: center;
+  background-color: #1F1E3D;
+  color: #1F1F3D;
+  display: flex;
+  height: 36px;
+  justify-content: space-between;
+  padding: 4px;
 }
 
 .container-search {
@@ -57,7 +82,12 @@ input {
 }
 
 .idea-card {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
   height: 265px;
+  justify-content: space-between;
+  margin: 20px;
   width: 245px;
 }
 
@@ -102,6 +132,10 @@ input {
   align-items: center;
 }
 
+#add-comment {
+  margin: 0px;
+}
+
 #button-save {
   background-color: #353567;
   border-color: #5C5FA8;
@@ -125,6 +159,15 @@ input {
   min-width: 190px;
   margin: .4em;
   border: none;
+}
+
+#card-body-text {
+  font-size: 18px;
+}
+
+#comment-logo {
+  height: 30px;
+  width: 30px;
 }
 
 #input-body {
