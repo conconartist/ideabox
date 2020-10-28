@@ -20,7 +20,6 @@
           <input id="input-title" type="text" name="" value="">
           <h2>Body</h2>
           <textarea id="input-body" name="name" wrap="soft"></textarea>
-          <!-- <input id="input-body" type="text" name="" value=""> -->
           <button disabled id="button-save" type="button" name="button">Save</button>
           <div class="container-search">
             <img id="button-search" src="./assets/search.svg" alt="">
@@ -29,20 +28,22 @@
         </div>
       </section>
       <section class="user-ideas wrapper">
-        <section class="idea-card">
-          <div class="card-header">
-            <img id="icon-star" src="./assets/star.svg" alt="">
-            <img id="icon-delete" src="./assets/delete.svg" alt="">
-          </div>
-          <div class="card-body">
-            <h3>Idea title</h3>
-            <p id="card-body-text">Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
-          </div>
-          <div class="card-footer">
-            <img id="comment-logo" src="./assets/comment.svg" alt="">
-            <p id="add-comment">Comment</p>
-          </div>
-        </section>
+        <template id="unique-card">
+          <section class="idea-card">
+            <div class="card-header">
+              <img id="icon-star" src="./assets/star.svg" alt="">
+              <img id="icon-delete" src="./assets/delete.svg" alt="">
+            </div>
+            <div class="card-body">
+              <h3>Idea title</h3>
+              <p id="card-body-text">Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
+            </div>
+            <div class="card-footer">
+              <img id="comment-logo" src="./assets/comment.svg" alt="">
+              <p id="add-comment">Comment</p>
+            </div>
+          </section>
+        </template>
       </section>
     </section>
     <script src="./src/ideas.js"></script>
