@@ -92,6 +92,15 @@ input {
   width: 50%;
 }
 
+.hidden {
+  display: none;
+}
+
+.icon-delete{
+  cursor: pointer;
+}
+
+
 .idea-card {
   background-color: #FFFFFF;
   display: flex;
@@ -133,8 +142,10 @@ input {
 
 .user-ideas {
   background-color: #EAEAF4;
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   height: 100%;
+  width: 100%;
 }
 
 .wrapper {
