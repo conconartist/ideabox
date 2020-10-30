@@ -96,10 +96,10 @@ input {
   display: none;
 }
 
-.icon-delete{
+.icon-delete:hover{
+  content: url('./assets/delete-active.svg');
   cursor: pointer;
 }
-
 
 .idea-card {
   background-color: #FFFFFF;
@@ -107,7 +107,7 @@ input {
   flex-direction: column;
   height: 265px;
   justify-content: space-between;
-  margin: 20px;
+  margin: 20px 5px 0px 15px;
   width: 245px;
 }
 
@@ -141,6 +141,7 @@ input {
 }
 
 .user-ideas {
+  align-content: flex-start;
   background-color: #EAEAF4;
   display: flex;
   flex-wrap: wrap;
