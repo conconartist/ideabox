@@ -1,6 +1,6 @@
 // global variables & query selectors
 
-var ideaArray = []
+var ideas = []
 
 var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
@@ -34,7 +34,7 @@ userIdeas.addEventListener('click', function(event) {
 
 function saveNewIdea() {
   var newIdea = new Idea(inputTitle.value, inputBody.value)
-  ideaArray.push(newIdea)
+  ideas.push(newIdea)
 
   createCardFromTemplate(newIdea)
   clearInputFields()
@@ -66,9 +66,9 @@ function createCardFromTemplate(userIdea) {
 
 function addStar(id) {
   var cardToStar = event.target.id
-  for (i = 0; i < ideaArray.length; i++) {
-    if(ideaArray[i].id == cardToStar) {
-      ideaArray[i].star = true;
+  for (i = 0; i < ideas.length; i++) {
+    if(ideas[i].id == cardToStar) {
+      ideas[i].star = true;
     }
   }
 }
@@ -88,9 +88,9 @@ function removeCardDisplay(id) {
 
 function removeCardFromArray() {
   var delIdea = event.target.id;
-  for (var i = 0; i < ideaArray.length; i++){
-    if(delIdea == ideaArray[i].id){
-      ideaArray.splice(i, 1);
+  for (var i = 0; i < ideas.length; i++){
+    if(delIdea == ideas[i].id){
+      ideas.splice(i, 1);
     }
   }
 }
