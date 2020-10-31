@@ -1,6 +1,7 @@
 // global variables & query selectors
 
 var ideas = []
+var starredIdeas =[];
 
 var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
@@ -112,15 +113,22 @@ function deleteCardFromLocalStorage() {
 }
 
 function showStarredIdeas() {
-  savedIdeas = localStorage.getItem('savedCards');
   //retrieve cards from localStorage
   //for loop through star = true
-  for (var i = 0; i < savedIdeas.length; i++) {
-    if(savedIdeas[i].star === true) {
+  // var starredIdeas =[];
+  for (var i = 0; i < ideas.length; i++) {
+    console.log('yoooo')
+    if(ideas[i].star === true) {
+      console.log('true');
+      var starredIdea = localStorage.getItem(`${ideas[i].id}`)
+      var starredItem = JSON.parse(starredIdea)
+      starredIdeas.push(starredItem);
     //display savedIdeas (push to new array?)
     }
   }
+  console.log("poo");
 }
+
 
 function addTitleToTemplate(card, userTitle) {
   card.querySelector('div.card-body h3').innerText = userTitle

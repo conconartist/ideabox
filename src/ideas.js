@@ -8,8 +8,7 @@ class Idea {
 
   saveToStorage() {
     var savedCard = JSON.stringify(this)
-
-    localStorage.setItem('savedCards', savedCard);
+    localStorage.setItem(`${this.id}`, savedCard);
 
     // this.star = true
     // add to localStorage
