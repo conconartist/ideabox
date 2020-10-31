@@ -39,6 +39,7 @@ function saveNewIdea() {
   ideas.push(newIdea)
 
   createCardFromTemplate(newIdea)
+  saveCardToLocalStorage(newIdea)
   clearInputFields()
   setSaveButtonState()
 }
@@ -63,7 +64,6 @@ function createCardFromTemplate(userIdea) {
   addIdToTemplate(ideaCard, userIdea.id)
 
   userIdeas.appendChild(ideaCard)
-  saveCardToLocalStorage(userIdea)
   clearInputFields()
 }
 
@@ -99,8 +99,9 @@ function removeCardFromArray() {
 }
 
 function saveCardToLocalStorage (currentIdea) {
-  var savedCard = JSON.stringify(currentIdea)
-  currentIdea.saveToStorage(savedCard)
+  // currentIdea.saveToStorage(savedCard)
+  currentIdea.saveToStorage();
+  // localStorage.setItem('savedCards', savedCard);
 //all cards created are saved to local storage from ideas array
 //use idea class currentIdea.saveToStorage();
 }
@@ -111,8 +112,14 @@ function deleteCardFromLocalStorage() {
 }
 
 function showStarredIdeas() {
+  savedIdeas = localStorage.getItem('savedCards');
   //retrieve cards from localStorage
-  //loop through star = true
+  //for loop through star = true
+  for (var i = 0; i < savedIdeas.length; i++) {
+    if(savedIdeas[i].star === true) {
+    //display savedIdeas (push to new array?)
+    }
+  }
 }
 
 function addTitleToTemplate(card, userTitle) {
