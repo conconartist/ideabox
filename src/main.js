@@ -25,15 +25,8 @@ userIdeas.addEventListener('click', function(event) {
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
-
-    if (event.target.src.includes('/assets/star.svg')) {
-      event.target.src = './assets/star-active.svg'
-    } else {
-      event.target.src = './assets/star.svg'
-    }
-
+    activeStar()
     addStar(event.target.id)
-
   }
 });
 
@@ -71,6 +64,23 @@ function createCardFromTemplate(userIdea) {
   clearInputFields()
 }
 
+function addStar(id) {
+  var cardToStar = event.target.id
+  for (i = 0; i < ideaArray.length; i++) {
+    if(ideaArray[i].id == cardToStar) {
+      ideaArray[i].star = true;
+    }
+  }
+}
+
+function  activeStar() {
+  if (event.target.src.includes('/assets/star.svg')) {
+    event.target.src = './assets/star-active.svg'
+  } else {
+    event.target.src = './assets/star.svg'
+  }
+}
+
 function removeCardDisplay(id) {
   var cardToDelete = document.getElementById(id)
   userIdeas.removeChild(cardToDelete)
@@ -97,15 +107,4 @@ function addIdToTemplate(card, cardId) {
   card.querySelector('section.idea-card').id = cardId
   card.querySelector('img.icon-delete').id = cardId
   card.querySelector('img.icon-star').id = cardId
-}
-
-function addStar(id) {
-  var cardToStar = event.target.id
-  console.log(cardToStar)
-  for (i = 0; i < ideaArray.length; i++) {
-    console.log(ideaArray[i].id)
-    if(ideaArray[i].id == cardToStar) {
-      ideaArray[i].star = true;
-    }
-  }
 }
