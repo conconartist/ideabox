@@ -25,7 +25,6 @@ userIdeas.addEventListener('click', function(event) {
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
-    console.log(typeof event.target.src)
 
     if (event.target.src.includes('/assets/star.svg')) {
       event.target.src = './assets/star-active.svg'
@@ -33,7 +32,8 @@ userIdeas.addEventListener('click', function(event) {
       event.target.src = './assets/star.svg'
     }
 
-    
+    addStar(event.target.id)
+
   }
 });
 
@@ -96,4 +96,16 @@ function addBodyToTemplate(card, userBody) {
 function addIdToTemplate(card, cardId) {
   card.querySelector('section.idea-card').id = cardId
   card.querySelector('img.icon-delete').id = cardId
+  card.querySelector('img.icon-star').id = cardId
+}
+
+function addStar(id) {
+  var cardToStar = event.target.id
+  console.log(cardToStar)
+  for (i = 0; i < ideaArray.length; i++) {
+    console.log(ideaArray[i].id)
+    if(ideaArray[i].id == cardToStar) {
+      ideaArray[i].star = true;
+    }
+  }
 }
