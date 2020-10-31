@@ -14,6 +14,7 @@ var favIdea = document.querySelector('.icon-star')
 var showFavIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
+window.addEventListener('load', showStarredIdeas)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
@@ -113,22 +114,31 @@ function deleteCardFromLocalStorage() {
 }
 
 function showStarredIdeas() {
+  event.preventDefault();
   //retrieve cards from localStorage
-  //for loop through star = true
-  // var starredIdeas =[];
   for (var i = 0; i < ideas.length; i++) {
-    console.log('yoooo')
     if(ideas[i].star === true) {
-      console.log('true');
       var starredIdea = localStorage.getItem(`${ideas[i].id}`)
       var starredItem = JSON.parse(starredIdea)
       starredIdeas.push(starredItem);
     //display savedIdeas (push to new array?)
     }
   }
-  console.log("poo");
+  displayStarredIdeas();
 }
 
+function displayStarredIdeas(card) {
+
+  // event.preventDefault();
+  userIdeas.innerText = "";
+    //remove cards that aren't favorited or refresh display?
+  // var starredDisplayCard = starredIdeas[i]
+  for (var i = 0; i < starredIdeas.length; i++) {
+    createCardFromTemplate(starredIdeas[i]);
+  //   favIdea.src = './assets/star-active.svg'
+  //add/hide class for icon active/ hidden?
+  }
+}
 
 function addTitleToTemplate(card, userTitle) {
   card.querySelector('div.card-body h3').innerText = userTitle
