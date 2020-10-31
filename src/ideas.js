@@ -9,11 +9,13 @@ class Idea {
   saveToStorage() {
     // this.star = true
     // add to localStorage
+
   }
 
   deleteFromStorage() {
     // this.star = false
     // remove from localStorage
+
   }
 
   updateIdea(newTitle, newBody) {

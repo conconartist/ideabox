@@ -1,6 +1,7 @@
 // global variables & query selectors
 
 var ideas = []
+var favIdeas = []; //starred and saved to local storage
 
 var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
@@ -93,6 +94,24 @@ function removeCardFromArray() {
       ideas.splice(i, 1);
     }
   }
+}
+
+function addToFavoriteIdeas() {
+//if starred, add to favoriteIdeas array 
+}
+
+function saveCardToLocalStorage () {
+//all cards created are saved to local storage from ideas array
+//use idea class currentIdea.saveToStorage();
+}
+
+function saveFavCardToLocalStorage () {
+  //all cards in favorite ideas array
+}
+
+function removeCardFromLocalStorage() {
+  //remove card from ideas array
+  //remove card from fav ideas array
 }
 
 function addTitleToTemplate(card, userTitle) {
