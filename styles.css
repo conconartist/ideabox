@@ -101,6 +101,12 @@ input {
   cursor: pointer;
 }
 
+.icon-star:hover{
+  content: url('./assets/star-active.svg');
+  cursor: pointer;
+}
+
+
 .idea-card {
   background-color: #FFFFFF;
   display: flex;

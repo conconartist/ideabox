@@ -23,6 +23,19 @@ userIdeas.addEventListener('click', function(event) {
   }
 });
 
+userIdeas.addEventListener('click', function(event) {
+  if (event.target.className === 'icon-star') {
+    console.log(typeof event.target.src)
+
+    if (event.target.src.includes('/assets/star.svg')) {
+      event.target.src = './assets/star-active.svg'
+    } else {
+      event.target.src = './assets/star.svg'
+    }
+
+    
+  }
+});
 
 // functions
 
