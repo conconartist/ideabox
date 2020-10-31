@@ -7,6 +7,7 @@ class Idea {
   }
 
   saveToStorage() {
+    localStorage.setItem('savedCards', savedCard);
     // this.star = true
     // add to localStorage
 

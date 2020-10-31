@@ -1,7 +1,6 @@
 // global variables & query selectors
 
 var ideas = []
-var favIdeas = []; //starred and saved to local storage
 
 var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
@@ -17,7 +16,7 @@ var showFavIdeasButton = document.querySelector('#button-starred')
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
-showFavIdeasButton.addEventListener('click', )
+showFavIdeasButton.addEventListener('click', showStarredIdeas)
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
@@ -64,6 +63,7 @@ function createCardFromTemplate(userIdea) {
   addIdToTemplate(ideaCard, userIdea.id)
 
   userIdeas.appendChild(ideaCard)
+  saveCardToLocalStorage(userIdea)
   clearInputFields()
 }
 
@@ -98,7 +98,9 @@ function removeCardFromArray() {
   }
 }
 
-function saveCardToLocalStorage () {
+function saveCardToLocalStorage (currentIdea) {
+  var savedCard = JSON.stringify(currentIdea)
+  currentIdea.saveToStorage(savedCard)
 //all cards created are saved to local storage from ideas array
 //use idea class currentIdea.saveToStorage();
 }
