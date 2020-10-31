@@ -8,14 +8,16 @@ var inputBody = document.querySelector('#input-body')
 var userIdeas = document.querySelector('.user-ideas')
 var ideaCardTemplate = document.querySelector('#unique-card')
 
-var saveButton = document.querySelector('#button-save');
+var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
 var favIdea = document.querySelector('.icon-star')
+var showFavIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
+showFavIdeasButton.addEventListener('click', )
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
@@ -96,22 +98,19 @@ function removeCardFromArray() {
   }
 }
 
-function addToFavoriteIdeas() {
-//if starred, add to favoriteIdeas array 
-}
-
 function saveCardToLocalStorage () {
 //all cards created are saved to local storage from ideas array
 //use idea class currentIdea.saveToStorage();
 }
 
-function saveFavCardToLocalStorage () {
-  //all cards in favorite ideas array
-}
-
-function removeCardFromLocalStorage() {
+function deleteCardFromLocalStorage() {
   //remove card from ideas array
   //remove card from fav ideas array
+}
+
+function showStarredIdeas() {
+  //retrieve cards from localStorage
+  //loop through star = true
 }
 
 function addTitleToTemplate(card, userTitle) {
