@@ -11,7 +11,7 @@ var ideaCardTemplate = document.querySelector('#unique-card')
 var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
 var favIdea = document.querySelector('.icon-star')
-var showFavIdeasButton = document.querySelector('#button-starred')
+var showStarredIdeasButton = document.querySelector('#button-starred')
 var showAllIdeasButton = document.querySelector('#button-all')
 
 // event listeners
@@ -19,7 +19,7 @@ window.addEventListener('load', refreshDisplay)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
-showFavIdeasButton.addEventListener('click', showStarredIdeas)
+showStarredIdeasButton.addEventListener('click', showStarredIdeas)
 showAllIdeasButton.addEventListener('click', showAllIdeas)
 
 userIdeas.addEventListener('click', function(event) {
@@ -88,11 +88,6 @@ function  activeStar() {
   }
 }
 
-function activateStar(starredIdea) {
-  // var starredCard = document.querySelector(`#${starredIdea}`)
-  // starredCard.src = './assets/star-active.svg'
-}
-
 function removeCardDisplay(id) {
   var cardToDelete = document.getElementById(id)
   userIdeas.removeChild(cardToDelete)
@@ -108,7 +103,6 @@ function removeCardFromArray() {
 }
 
 function saveCardToLocalStorage (currentIdea) {
-  // currentIdea.saveToStorage(savedCard)
   currentIdea.saveToStorage();
   // var ideasString = JSON.stringify(ideas);
   // localStorage.setItem('storedCards', ideas)
@@ -123,20 +117,17 @@ function deleteCardFromLocalStorage() {
 }
 
 function showStarredIdeas() {
-  // event.preventDefault();
-  // //retrieve cards from localStorage
-
   //figure out how to refresh page and keep the array displayed
   for (var i = 0; i < ideas.length; i++) {
     if(ideas[i].star === true) {
       var starredIdea = localStorage.getItem(`${ideas[i].id}`);
       var starredItem = JSON.parse(starredIdea);
       starredIdeas.push(starredItem);
-    //display savedIdeas (push to new array?)
     }
   }
-
   displayStarredIdeas();
+  showStarredIdeasButton.classList.add('hidden');
+  showAllIdeasButton.classList.remove('hidden');
 }
 
 function displayStarredIdeas(card) {
@@ -148,6 +139,13 @@ function displayStarredIdeas(card) {
   //add/hide class for icon active/ hidden?
     }
   // }
+}
+
+function showAllIdeas() {
+  showStarredIdeasButton.classList.remove('hidden');
+  showAllIdeasButton.classList.add('hidden');
+  //hide show Starred ideas saveButton
+  //show all saved idea cards
 }
 
 function refreshDisplay() {
