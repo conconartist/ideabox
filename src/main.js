@@ -12,6 +12,7 @@ var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
 var favIdea = document.querySelector('.icon-star')
 var showFavIdeasButton = document.querySelector('#button-starred')
+var showAllIdeasButton = document.querySelector('#button-all')
 
 // event listeners
 window.addEventListener('load', refreshDisplay)
@@ -19,6 +20,7 @@ saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
 showFavIdeasButton.addEventListener('click', showStarredIdeas)
+showAllIdeasButton.addEventListener('click', showAllIdeas)
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
@@ -86,8 +88,9 @@ function  activeStar() {
   }
 }
 
-function activateStar() {
-//change img src of icon to   starredIdeas[i].src = './assets/star-active.svg'
+function activateStar(starredIdea) {
+  // var starredCard = document.querySelector(`#${starredIdea}`)
+  // starredCard.src = './assets/star-active.svg'
 }
 
 function removeCardDisplay(id) {
@@ -137,18 +140,14 @@ function showStarredIdeas() {
 }
 
 function displayStarredIdeas(card) {
-
-  // event.preventDefault();
   userIdeas.innerText = "";
-    //remove cards that aren't favorited or refresh display?
   // var starredDisplayCard = starredIdeas[i]
-  if(starredIdeas !== null || starredIdeas !== undefined) {
+  // if(starredIdeas !== null && starredIdeas !== undefined) {
     for (var i = 0; i < starredIdeas.length; i++) {
       createCardFromTemplate(starredIdeas[i]);
-      starredIdeas[i].src = './assets/star-active.svg'
   //add/hide class for icon active/ hidden?
     }
-  }
+  // }
 }
 
 function refreshDisplay() {
