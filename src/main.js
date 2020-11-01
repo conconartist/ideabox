@@ -15,7 +15,7 @@ var showStarredIdeasButton = document.querySelector('#button-starred')
 var showAllIdeasButton = document.querySelector('#button-all')
 
 // event listeners
-window.addEventListener('load', refreshDisplay)
+// window.addEventListener('load', refreshDisplay)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
@@ -142,10 +142,14 @@ function displayStarredIdeas(card) {
 }
 
 function showAllIdeas() {
+  userIdeas.innerText = "";
   showStarredIdeasButton.classList.remove('hidden');
   showAllIdeasButton.classList.add('hidden');
   //hide show Starred ideas saveButton
   //show all saved idea cards
+  for (var i = 0; i < ideas.length; i++) {
+    createCardFromTemplate(ideas[i]);
+  }
 }
 
 function refreshDisplay() {
