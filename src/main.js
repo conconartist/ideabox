@@ -14,7 +14,7 @@ var favIdea = document.querySelector('.icon-star')
 var showFavIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
-window.addEventListener('load', showStarredIdeas)
+window.addEventListener('load', refreshDisplay)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
@@ -86,6 +86,10 @@ function  activeStar() {
   }
 }
 
+function activateStar() {
+//change img src of icon to   starredIdeas[i].src = './assets/star-active.svg'
+}
+
 function removeCardDisplay(id) {
   var cardToDelete = document.getElementById(id)
   userIdeas.removeChild(cardToDelete)
@@ -103,6 +107,8 @@ function removeCardFromArray() {
 function saveCardToLocalStorage (currentIdea) {
   // currentIdea.saveToStorage(savedCard)
   currentIdea.saveToStorage();
+  // var ideasString = JSON.stringify(ideas);
+  // localStorage.setItem('storedCards', ideas)
   // localStorage.setItem('savedCards', savedCard);
 //all cards created are saved to local storage from ideas array
 //use idea class currentIdea.saveToStorage();
@@ -114,16 +120,19 @@ function deleteCardFromLocalStorage() {
 }
 
 function showStarredIdeas() {
-  event.preventDefault();
-  //retrieve cards from localStorage
+  // event.preventDefault();
+  // //retrieve cards from localStorage
+
+  //figure out how to refresh page and keep the array displayed
   for (var i = 0; i < ideas.length; i++) {
     if(ideas[i].star === true) {
-      var starredIdea = localStorage.getItem(`${ideas[i].id}`)
-      var starredItem = JSON.parse(starredIdea)
+      var starredIdea = localStorage.getItem(`${ideas[i].id}`);
+      var starredItem = JSON.parse(starredIdea);
       starredIdeas.push(starredItem);
     //display savedIdeas (push to new array?)
     }
   }
+
   displayStarredIdeas();
 }
 
@@ -133,11 +142,19 @@ function displayStarredIdeas(card) {
   userIdeas.innerText = "";
     //remove cards that aren't favorited or refresh display?
   // var starredDisplayCard = starredIdeas[i]
-  for (var i = 0; i < starredIdeas.length; i++) {
-    createCardFromTemplate(starredIdeas[i]);
-  //   favIdea.src = './assets/star-active.svg'
+  if(starredIdeas !== null || starredIdeas !== undefined) {
+    for (var i = 0; i < starredIdeas.length; i++) {
+      createCardFromTemplate(starredIdeas[i]);
+      starredIdeas[i].src = './assets/star-active.svg'
   //add/hide class for icon active/ hidden?
+    }
   }
+}
+
+function refreshDisplay() {
+  //iff an idea is created, idea card is still there when refreshDisplay
+  //when two cards are made, one is deleted, the other is still there on refreshDisplay
+  //when a card is favorited, the card is still red star when page is refresh
 }
 
 function addTitleToTemplate(card, userTitle) {
