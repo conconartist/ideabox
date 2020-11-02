@@ -2,6 +2,7 @@
 
 var ideas = []
 var starredIdeas =[];
+var newIdea;
 
 var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
@@ -31,7 +32,7 @@ userIdeas.addEventListener('click', function(event) {
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
-    activeStar()
+    activeStar(event)
     addStar(event.target.id)
   }
 });
@@ -39,11 +40,10 @@ userIdeas.addEventListener('click', function(event) {
 // functions
 
 function saveNewIdea() {
-  var newIdea = new Idea(inputTitle.value, inputBody.value)
+  newIdea = new Idea(inputTitle.value, inputBody.value)
   ideas.push(newIdea)
-
-  createCardFromTemplate(newIdea)
   saveCardToLocalStorage(newIdea)
+  createCardFromTemplate(newIdea)
   clearInputFields()
   setSaveButtonState()
 }
@@ -72,16 +72,17 @@ function createCardFromTemplate(userIdea) {
 }
 
 function addStar(id) {
-  var cardToStar = event.target.id
+  // var cardToStar = event.target.id
   for (i = 0; i < ideas.length; i++) {
-    if(ideas[i].id == cardToStar) {
+    if(ideas[i].id == id) {
       ideas[i].star = true;
+      starredIdeas.push(ideas[i]);
     }
   }
 }
 
-function  activeStar() {
-  if (event.target.src.includes('/assets/star.svg')) {
+function  activeStar() { //pass in event?
+  if (event.target.src.includes('/assets/star.svg')) { //use === instead of includes?
     event.target.src = './assets/star-active.svg'
   } else {
     event.target.src = './assets/star.svg'
@@ -108,7 +109,6 @@ function saveCardToLocalStorage (currentIdea) {
   // localStorage.setItem('storedCards', ideas)
   // localStorage.setItem('savedCards', savedCard);
 //all cards created are saved to local storage from ideas array
-//use idea class currentIdea.saveToStorage();
 }
 
 function deleteCardFromLocalStorage() {
@@ -117,14 +117,15 @@ function deleteCardFromLocalStorage() {
 }
 
 function showStarredIdeas() {
+    userIdeas.innerText = "";
   //figure out how to refresh page and keep the array displayed
-  for (var i = 0; i < ideas.length; i++) {
-    if(ideas[i].star === true) {
-      var starredIdea = localStorage.getItem(`${ideas[i].id}`);
-      var starredItem = JSON.parse(starredIdea);
-      starredIdeas.push(starredItem);
-    }
-  }
+  // for (var i = 0; i < ideas.length; i++) {
+  //   if(ideas[i].star === true) {
+  //     var starredIdea = localStorage.getItem(`${ideas[i].id}`);
+  //     var starredItem = JSON.parse(starredIdea);
+  //     starredIdeas.push(starredItem);
+  //   }
+  // }
   displayStarredIdeas();
   showStarredIdeasButton.classList.add('hidden');
   showAllIdeasButton.classList.remove('hidden');
@@ -135,10 +136,13 @@ function displayStarredIdeas(card) {
   // var starredDisplayCard = starredIdeas[i]
   // if(starredIdeas !== null && starredIdeas !== undefined) {
     for (var i = 0; i < starredIdeas.length; i++) {
-      createCardFromTemplate(starredIdeas[i]);
+      var card = createCardFromTemplate(starredIdeas[i]);
+      console.log(card);
+      //card.src = ./assets/star
+      // if(starredIdeas[i].star) {
+      //   favIdea.src = './assets/star-active.svg'
   //add/hide class for icon active/ hidden?
     }
-  // }
 }
 
 function showAllIdeas() {
@@ -147,9 +151,16 @@ function showAllIdeas() {
   showAllIdeasButton.classList.add('hidden');
   //hide show Starred ideas saveButton
   //show all saved idea cards
-  for (var i = 0; i < ideas.length; i++) {
-    createCardFromTemplate(ideas[i]);
+  var storedIdeas = []
+  for (var i = 0; i < localStorage.length; i++) {
+      var retrievedCard = localStorage.getItem(`${localStorage[i]}`);
+      var parsedCard = JSON.parse(retrievedCard);
+      storedIdeas.push(parsedCard);
   }
+      console.log(storedIdeas)
+  // for (var i = 0; i < storedIdeas.length; i++) {
+  //   createCardFromTemplate(storedIdeas[i]);
+  // }
 }
 
 function refreshDisplay() {
@@ -171,3 +182,10 @@ function addIdToTemplate(card, cardId) {
   card.querySelector('img.icon-delete').id = cardId
   card.querySelector('img.icon-star').id = cardId
 }
+//instead setting each item by id, set the whole array ideas, starred ideas
+//every time i create a card, uplaod to idea array, push to local saveToStorage
+//every time I star a card, upload to favorites array, push to local saveToStorage
+//any time you change the array, save to local saveToStorage
+//the only time you need to get the data is on page load
+//use if statement (if local storage exists, set array to local storage items), or default
+//to empty arrays

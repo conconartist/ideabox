@@ -3,14 +3,14 @@ class Idea {
     this.id = Date.now();
     this.title = ideaTitle;
     this.body = ideaBody;
-    this.star = false;
+    this.star = false;//if statement to true if favorited
   }
 
   saveToStorage() {
-      var savedCard = JSON.stringify(this)
-      localStorage.setItem(`${this.id}`, savedCard);
+      // this.star = true;
+      var stringifiedCard = JSON.stringify(this)
+      localStorage.setItem(`${this.id}`, stringifiedCard);
 
-    // this.star = true
     // add to localStorage
 
   }
