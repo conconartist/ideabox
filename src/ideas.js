@@ -10,9 +10,6 @@ class Idea {
       // this.star = true;
       var stringifiedCard = JSON.stringify(this)
       localStorage.setItem(`${this.id}`, stringifiedCard);
-
-    // add to localStorage
-
   }
 
   deleteFromStorage() {
