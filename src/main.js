@@ -1,8 +1,8 @@
 // global variables & query selectors
 
 var ideas = []
-var starredIdeas =[];
-var newIdea;
+// var starredIdeas =[];
+var newIdea
 
 var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
@@ -13,27 +13,26 @@ var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
 var favIdea = document.querySelector('.icon-star')
 var showStarredIdeasButton = document.querySelector('#button-starred')
-var showAllIdeasButton = document.querySelector('#button-all')
 
 // event listeners
-// window.addEventListener('load', refreshDisplay)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
-showStarredIdeasButton.addEventListener('click', showStarredIdeas)
-showAllIdeasButton.addEventListener('click', showAllIdeas)
+showStarredIdeasButton.addEventListener('click', toggleIdeasDisplay)
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
-    removeCardDisplay(event.target.id)
+    removeCardFromDisplay(event.target.id)
+    // event.target.getAttribute('name')
     removeCardFromArray()
   }
 });
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
-    activeStar(event)
-    addStar(event.target.id)
+    toggleStarred(event)
+    // addStar(event.target.id)
+    // event.target.getAttribute('name')
   }
 });
 
@@ -42,7 +41,7 @@ userIdeas.addEventListener('click', function(event) {
 function saveNewIdea() {
   newIdea = new Idea(inputTitle.value, inputBody.value)
   ideas.push(newIdea)
-  // saveCardToLocalStorage(newIdea)
+
   createCardFromTemplate(newIdea)
   clearInputFields()
   setSaveButtonState()
@@ -71,52 +70,84 @@ function createCardFromTemplate(userIdea) {
   clearInputFields()
 }
 
-function addStar(id) {
-  // var cardToStar = event.target.id
-  for (i = 0; i < ideas.length; i++) {
-    if(ideas[i].id == id) {
-      ideas[i].star = true;
-      starredIdeas.push(ideas[i]);
+// function addStar(id) {
+//   // var cardToStar = event.target.id
+//   for (i = 0; i < ideas.length; i++) {
+//     if(ideas[i].id == id) {
+//       ideas[i].star = true;
+//       starredIdeas.push(ideas[i]);
+//     }
+//   }
+// }
+
+function toggleStarred(event) {
+  // change card.star to true
+
+  for (var i = 0; i < ideas.length; i++) {
+    if (`${ideas[i].id}` === event.target.parentElement.parentElement.id) {
+      ideas[i].star = !ideas[i].star
     }
   }
-}
 
-function  activeStar() { //pass in event?
-  if (event.target.src.includes('/assets/star.svg')) { //use === instead of includes?
-    event.target.src = './assets/star-active.svg'
-  } else {
+  if (event.target.parentElement.parentElement.classList.contains('starred')) {
+    // add starred class to idea-card
+    event.target.parentElement.parentElement.classList.remove('starred')
+    // toggle star icon
     event.target.src = './assets/star.svg'
+  } else {
+    event.target.parentElement.parentElement.classList.add('starred')
+    event.target.src = './assets/star-active.svg'
   }
+
+  // if (event.target.src.includes('/assets/star.svg')) { // includes rather than === explanation
+  //   event.target.src = './assets/star-active.svg'
+  // } else {
+  //   event.target.src = './assets/star.svg'
+  // }
 }
 
-function removeCardDisplay(id) {
+function removeCardFromDisplay(id) {
   var cardToDelete = document.getElementById(id)
   userIdeas.removeChild(cardToDelete)
 }
 
 function removeCardFromArray() {
-  var delIdea = event.target.id;
-  for (var i = 0; i < ideas.length; i++){
-    if(delIdea == ideas[i].id){
-      ideas.splice(i, 1);
+  var deleteIdea = event.target.id
+
+  for (var i = 0; i < ideas.length; i++) {
+    if (deleteIdea == ideas[i].id) {
+      ideas.splice(i, 1)
     }
   }
 }
 
-function saveCardToLocalStorage (currentIdea) {
-  currentIdea.saveToStorage();
+function toggleIdeasDisplay() {
+  // when show starred ideas button is clicked:
+  if (userIdeas.classList.contains('show-starred-ideas')) {
+    showStarredIdeasButton.innerText = 'Show Starred Ideas'
+  } else {
+    showStarredIdeasButton.innerText = 'Show All Ideas'
+  }
+  // add show-starred-ideas class to user-ideas
+  userIdeas.classList.toggle('show-starred-ideas')
+  // change button innertext to say 'show all ideas'
+
+}
+
+// function saveCardToLocalStorage (currentIdea) {
+  // currentIdea.saveToStorage();
   // var ideasString = JSON.stringify(ideas);
   // localStorage.setItem('storedCards', ideas)
   // localStorage.setItem('savedCards', savedCard);
-}
+// }
 
-function deleteCardFromLocalStorage() {
+// function deleteCardFromLocalStorage() {
   //remove card from ideas array
   //remove card from fav ideas array
-}
+// }
 
-function showStarredIdeas() {
-    userIdeas.innerText = "";
+// function showStarredIdeas() {
+//     userIdeas.innerText = "";
   //figure out how to refresh page and keep the array displayed
   // for (var i = 0; i < ideas.length; i++) {
   //   if(ideas[i].star === true) {
@@ -125,38 +156,28 @@ function showStarredIdeas() {
   //     starredIdeas.push(starredItem);
   //   }
   // }
-  displayStarredIdeas();
-  showStarredIdeasButton.classList.add('hidden');
-  showAllIdeasButton.classList.remove('hidden');
-}
+//   displayStarredIdeas();
+//   showStarredIdeasButton.classList.add('hidden');
+//   showAllIdeasButton.classList.remove('hidden');
+// }
 
-function displayStarredIdeas() {
-  userIdeas.innerText = "";
-  for (var i = 0; i < starredIdeas.length; i++) {
-    createCardFromTemplate(starredIdeas[i]);
-    //add/hide class for icon active/ hidden?
-  }
-}
-
-function showAllIdeas() {
-  userIdeas.innerText = "";
-  showStarredIdeasButton.classList.remove('hidden');
-  showAllIdeasButton.classList.add('hidden');
-
-  for (var i = 0; i < ideas.length; i++) {
-    createCardFromTemplate(ideas[i]);
-  }
-}
-
-function refreshDisplay() {
-  //if an idea is created, idea card is still there when refreshDisplay
-  //when two cards are made, one is deleted, the other is still there on refreshDisplay
-  //when a card is favorited, the card is still red star when page is refresh
-
-  // var retrievedCard = localStorage.getItem(`${localStorage[i]}`);
-  // var parsedCard = JSON.parse(retrievedCard);
-  // storedIdeas.push(parsedCard);
-}
+// function displayStarredIdeas() {
+//   userIdeas.innerText = "";
+//   for (var i = 0; i < starredIdeas.length; i++) {
+//     createCardFromTemplate(starredIdeas[i]);
+//     //add/hide class for icon active/ hidden?
+//   }
+// }
+//
+// function showAllIdeas() {
+//   userIdeas.innerText = "";
+//   showStarredIdeasButton.classList.remove('hidden');
+//   showAllIdeasButton.classList.add('hidden');
+//
+//   for (var i = 0; i < ideas.length; i++) {
+//     createCardFromTemplate(ideas[i]);
+//   }
+// }
 
 function addTitleToTemplate(card, userTitle) {
   card.querySelector('div.card-body h3').innerText = userTitle
@@ -170,6 +191,9 @@ function addIdToTemplate(card, cardId) {
   card.querySelector('section.idea-card').id = cardId
   card.querySelector('img.icon-delete').id = cardId
   card.querySelector('img.icon-star').id = cardId
+
+  // element.setAttribute('name', value)
+  // name = 'data-card-id'
 }
 //instead setting each item by id, set the whole array ideas, starred ideas
 //every time i create a card, uplaod to idea array, push to local saveToStorage

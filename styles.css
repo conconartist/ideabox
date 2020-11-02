@@ -101,11 +101,10 @@ input {
   cursor: pointer;
 }
 
-.icon-star:hover{
+/* .icon-star:hover{
   content: url('./assets/star-active.svg');
   cursor: pointer;
-}
-
+} */
 
 .idea-card {
   background-color: #FFFFFF;
@@ -140,6 +139,14 @@ input {
   margin-top: 18px;
   padding-bottom: 28px;
 }
+
+.show-starred-ideas .idea-card:not(.starred) {
+  display: none;
+}
+
+/* .starred .icon-star {
+  content: url()
+} */
 
 .user-form {
   background-color: #A9AAD2;
