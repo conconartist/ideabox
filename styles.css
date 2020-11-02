@@ -184,7 +184,7 @@ input {
   width: 1.5em;
 }
 
-#button-starred {
+#button-starred, #button-all {
   background-color: #5356A4;
   border: none;
   margin: .4em;
