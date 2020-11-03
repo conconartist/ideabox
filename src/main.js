@@ -27,15 +27,12 @@ userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
     removeCardFromArray()
     removeCardFromDisplay(event.target.getAttribute('data-card-id'))
-    // event.target.getAttribute('name')
   }
 });
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
     toggleStarred(event)
-    // addStar(event.target.id)
-    // event.target.getAttribute('name')
   }
 });
 
@@ -111,19 +108,24 @@ function searchIdeas() {
     userIdeas.classList.remove('show-search-ideas')
   } else {
     userIdeas.classList.add('show-search-ideas')
-    for (var i = 0; i < ideas.length; i++) {
+    checkInputField()
+  }
+}
 
-      if (ideas[i].title.toLowerCase().includes(searchBarInput.value.toLowerCase()) || ideas[i].body.toLowerCase().includes(searchBarInput.value.toLowerCase())) {
-        document.getElementById(`${ideas[i].id}`).classList.add('search-includes')
-      } else {
-        document.getElementById(`${ideas[i].id}`).classList.remove('search-includes')
-      }
+function checkInputField() {
+  for (var i = 0; i < ideas.length; i++) {
+    var cardTitle = ideas[i].title.toLowerCase()
+    var cardBody = ideas[i].body.toLowerCase()
+    var inputField = searchBarInput.value.toLowerCase()
+    if (cardTitle.includes(inputField) || cardBody.includes(inputField)) {
+      document.getElementById(`${ideas[i].id}`).classList.add('search-includes')
+    } else {
+      document.getElementById(`${ideas[i].id}`).classList.remove('search-includes')
     }
   }
 }
 
 function toggleIdeasDisplay() {
-  // when show starred ideas button is clicked:
   if (userIdeas.classList.contains('show-starred-ideas')) {
     showStarredIdeasButton.innerText = 'Show Starred Ideas'
   } else {
@@ -139,10 +141,7 @@ function updateLocalStorage() {
   localStorage.setItem('saved-cards', stringifiedCards)
   localStorage.setItem('starred-button', starredButtonState)
 }
-//Save the status of the button
-// Conditional: if the parsed value is "show starred ideas" show all Ideas
-// if the value is "show all ideas" show only starred ideas
-// Add (show-starred-ideas) class to (user-ideas)
+
 function displayButtonFromStorage() {
   var parsedButtonState = JSON.parse(localStorage.getItem('starred-button'))
   if(parsedButtonState === 'Show All Ideas') {
