@@ -11,7 +11,6 @@ var searchBarInput = document.querySelector('#input-search')
 
 var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
-var favIdea = document.querySelector('.icon-star')
 var showStarredIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
@@ -28,13 +27,13 @@ userIdeas.addEventListener('click', function(event) {
     removeCardFromArray()
     removeCardFromDisplay(event.target.getAttribute('data-card-id'))
   }
-});
+})
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
-    toggleStarred(event)
+    toggleStarred()
   }
-});
+})
 
 // functions
 
@@ -71,20 +70,28 @@ function createCardFromTemplate(userIdea) {
   updateLocalStorage()
 }
 
-function toggleStarred(event) {
+function toggleStarred() {
+  toggleStarProperty(event)
+  toggleStarIcon(event.target.parentElement.parentElement)
+  updateLocalStorage()
+}
+
+function toggleStarProperty(event) {
+  var iconAncestor = event.target.parentElement.parentElement
   for (var i = 0; i < ideas.length; i++) {
-    if (`${ideas[i].id}` === event.target.parentElement.parentElement.id) {
+    if (`${ideas[i].id}` === iconAncestor.id) {
       ideas[i].star = !ideas[i].star
     }
   }
+}
 
-  if (event.target.parentElement.parentElement.classList.contains('starred')) {
-    event.target.parentElement.parentElement.classList.remove('starred')
+function toggleStarIcon(iconAncestor) {
+  if (iconAncestor.classList.contains('starred')) {
+    iconAncestor.classList.remove('starred')
     event.target.src = './assets/star.svg'
   } else {
-    event.target.parentElement.parentElement.classList.add('starred')
+    iconAncestor.classList.add('starred')
   }
-  updateLocalStorage()
 }
 
 function removeCardFromDisplay(id) {
@@ -192,14 +199,4 @@ function addIdToTemplate(card, cardId) {
   card.querySelector('section.idea-card').id = cardId
   card.querySelector('img.icon-delete').setAttribute('data-card-id', cardId)
   card.querySelector('img.icon-star').setAttribute('data-card-id', cardId)
-
-  // element.setAttribute('name', value)
-  // name = 'data-card-id'
 }
-//instead setting each item by id, set the whole array ideas, starred ideas
-//every time i create a card, uplaod to idea array, push to local saveToStorage
-//every time I star a card, upload to favorites array, push to local saveToStorage
-//any time you change the array, save to local saveToStorage
-//the only time you need to get the data is on page load
-//use if statement (if local storage exists, set array to local storage items), or default
-//to empty arrays
