@@ -163,7 +163,7 @@ function updateLocalStorage() {
 
 function displayButtonFromStorage() {
   var parsedButtonState = JSON.parse(localStorage.getItem('starred-button'))
-  if(parsedButtonState === 'Show All Ideas') {
+  if (parsedButtonState === 'Show All Ideas') {
     userIdeas.classList.add('show-starred-ideas')
     showStarredIdeasButton.innerText = parsedButtonState
   }

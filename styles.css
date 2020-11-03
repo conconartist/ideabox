@@ -140,6 +140,10 @@ input {
   padding-bottom: 28px;
 }
 
+.show-search-ideas .idea-card:not(.search-includes) {
+  display: none;
+}
+
 .show-starred-ideas .idea-card:not(.starred) {
   display: none;
 }
@@ -160,10 +164,6 @@ input {
   flex-wrap: wrap;
   height: 100%;
   width: 100%;
-}
-
-.show-search-ideas .idea-card:not(.search-includes) {
-  display: none;
 }
 
 .wrapper {
