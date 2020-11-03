@@ -7,6 +7,7 @@ var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
 var userIdeas = document.querySelector('.user-ideas')
 var ideaCardTemplate = document.querySelector('#unique-card')
+var searchBarInput = document.querySelector('#input-search')
 
 var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
@@ -19,6 +20,8 @@ saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
 showStarredIdeasButton.addEventListener('click', toggleIdeasDisplay)
+searchBarInput.addEventListener('keyup', searchIdeas)
+
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
@@ -99,6 +102,22 @@ function removeCardFromArray() {
   for (var i = 0; i < ideas.length; i++) {
     if (deleteIdea == ideas[i].id) {
       ideas.splice(i, 1)
+    }
+  }
+}
+
+function searchIdeas() {
+  if (searchBarInput.value === "") {
+    userIdeas.classList.remove('show-search-ideas')
+  } else {
+    userIdeas.classList.add('show-search-ideas')
+    for (var i = 0; i < ideas.length; i++) {
+
+      if (ideas[i].title.toLowerCase().includes(searchBarInput.value.toLowerCase()) || ideas[i].body.toLowerCase().includes(searchBarInput.value.toLowerCase())) {
+        document.getElementById(`${ideas[i].id}`).classList.add('search-includes')
+      } else {
+        document.getElementById(`${ideas[i].id}`).classList.remove('search-includes')
+      }
     }
   }
 }
