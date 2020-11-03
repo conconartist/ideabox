@@ -24,8 +24,7 @@ searchBarInput.addEventListener('keyup', searchIdeas)
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
-    removeCardFromArray()
-    removeCardFromDisplay(event.target.getAttribute('data-card-id'))
+    removeCard()
   }
 })
 
@@ -94,10 +93,15 @@ function toggleStarIcon(iconAncestor) {
   }
 }
 
+function removeCard() {
+  removeCardFromDisplay(event.target.getAttribute('data-card-id'))
+  removeCardFromArray()
+  updateLocalStorage()
+}
+
 function removeCardFromDisplay(id) {
   var cardToDelete = document.getElementById(id)
   userIdeas.removeChild(cardToDelete)
-  updateLocalStorage()
 }
 
 function removeCardFromArray() {
