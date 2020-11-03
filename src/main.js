@@ -22,9 +22,9 @@ showStarredIdeasButton.addEventListener('click', toggleIdeasDisplay)
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
+    removeCardFromArray()
     removeCardFromDisplay(event.target.getAttribute('data-card-id'))
     // event.target.getAttribute('name')
-    removeCardFromArray()
   }
 });
 
@@ -68,12 +68,10 @@ function createCardFromTemplate(userIdea) {
 
   userIdeas.appendChild(ideaCard)
   clearInputFields()
-  newIdea.saveToStorage()
+  updateLocalStorage()
 }
 
 function toggleStarred(event) {
-  // change card.star to true
-
   for (var i = 0; i < ideas.length; i++) {
     if (`${ideas[i].id}` === event.target.parentElement.parentElement.id) {
       ideas[i].star = !ideas[i].star
@@ -81,24 +79,18 @@ function toggleStarred(event) {
   }
 
   if (event.target.parentElement.parentElement.classList.contains('starred')) {
-    // add starred class to idea-card
     event.target.parentElement.parentElement.classList.remove('starred')
-    // toggle star icon
     event.target.src = './assets/star.svg'
   } else {
     event.target.parentElement.parentElement.classList.add('starred')
-    // event.target.src = './assets/star-active.svg'
   }
-  // if (event.target.src.includes('/assets/star.svg')) { // includes rather than === explanation
-  //   event.target.src = './assets/star-active.svg'
-  // } else {
-  //   event.target.src = './assets/star.svg'
-  // }
+  updateLocalStorage()
 }
 
 function removeCardFromDisplay(id) {
   var cardToDelete = document.getElementById(id)
   userIdeas.removeChild(cardToDelete)
+  updateLocalStorage()
 }
 
 function removeCardFromArray() {
@@ -118,9 +110,26 @@ function toggleIdeasDisplay() {
   } else {
     showStarredIdeasButton.innerText = 'Show All Ideas'
   }
-  // add show-starred-ideas class to user-ideas
   userIdeas.classList.toggle('show-starred-ideas')
-  // change button innertext to say 'show all ideas'
+  updateLocalStorage()
+}
+
+function updateLocalStorage() {
+  var stringifiedCards = JSON.stringify(ideas)
+  var starredButtonState = JSON.stringify(showStarredIdeasButton.innerText)
+  localStorage.setItem('saved-cards', stringifiedCards)
+  localStorage.setItem('starred-button', starredButtonState)
+}
+//Save the status of the button
+// Conditional: if the parsed value is "show starred ideas" show all Ideas
+// if the value is "show all ideas" show only starred ideas
+// Add (show-starred-ideas) class to (user-ideas)
+function displayButtonFromStorage() {
+  var parsedButtonState = JSON.parse(localStorage.getItem('starred-button'))
+  if(parsedButtonState === 'Show All Ideas') {
+    userIdeas.classList.add('show-starred-ideas')
+    showStarredIdeasButton.innerText = parsedButtonState
+  }
 }
 
 function displayStoredIdeas() {
@@ -130,6 +139,7 @@ function displayStoredIdeas() {
 
     createCardsFromStorage()
     checkStarred()
+    displayButtonFromStorage()
   }
 }
 
