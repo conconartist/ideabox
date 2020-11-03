@@ -18,7 +18,7 @@ window.addEventListener('load', displayStoredIdeas)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
-showStarredIdeasButton.addEventListener('click', toggleIdeasDisplay)
+showStarredIdeasButton.addEventListener('click', toggleStarredIdeasDisplay)
 searchBarInput.addEventListener('keyup', searchIdeas)
 
 
@@ -119,11 +119,11 @@ function searchIdeas() {
     userIdeas.classList.remove('show-search-ideas')
   } else {
     userIdeas.classList.add('show-search-ideas')
-    checkInputField()
+    checkSearchInputField()
   }
 }
 
-function checkInputField() {
+function checkSearchInputField() {
   for (var i = 0; i < ideas.length; i++) {
     var cardTitle = ideas[i].title.toLowerCase()
     var cardBody = ideas[i].body.toLowerCase()
@@ -136,14 +136,22 @@ function checkInputField() {
   }
 }
 
-function toggleIdeasDisplay() {
+function toggleStarredIdeasDisplay() {
+  toggleButtonText()
+  toggleDisplayClass()
+  updateLocalStorage()
+}
+
+function toggleDisplayClass(){
+  userIdeas.classList.toggle('show-starred-ideas')
+}
+
+function toggleButtonText() {
   if (userIdeas.classList.contains('show-starred-ideas')) {
     showStarredIdeasButton.innerText = 'Show Starred Ideas'
   } else {
     showStarredIdeasButton.innerText = 'Show All Ideas'
   }
-  userIdeas.classList.toggle('show-starred-ideas')
-  updateLocalStorage()
 }
 
 function updateLocalStorage() {
