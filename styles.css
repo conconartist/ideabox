@@ -96,16 +96,15 @@ input {
   display: none;
 }
 
-.icon-delete:hover{
+.icon-delete:hover {
   content: url('./assets/delete-active.svg');
   cursor: pointer;
 }
 
-.icon-star:hover{
-  content: url('./assets/star-active.svg');
+.icon-star:hover {
+  /* content: url('./assets/star-active.svg'); */
   cursor: pointer;
 }
-
 
 .idea-card {
   background-color: #FFFFFF;
@@ -139,6 +138,14 @@ input {
   margin-bottom: 25px;
   margin-top: 18px;
   padding-bottom: 28px;
+}
+
+.show-starred-ideas .idea-card:not(.starred) {
+  display: none;
+}
+
+.starred .icon-star {
+  content: url('./assets/star-active.svg')
 }
 
 .user-form {

@@ -7,13 +7,11 @@ class Idea {
   }
 
   saveToStorage() {
-      // this.star = true;
-      var stringifiedCard = JSON.stringify(this)
-      localStorage.setItem(`${this.id}`, stringifiedCard);
+    var stringifiedCards = JSON.stringify(ideas)
+    localStorage.setItem('saved-cards', stringifiedCards)
   }
 
   deleteFromStorage() {
-    // this.star = false
     // remove from localStorage
 
   }
