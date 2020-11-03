@@ -1,7 +1,6 @@
 // global variables & query selectors
 
 var ideas = []
-// var starredIdeas =[];
 var newIdea
 
 var inputTitle = document.querySelector('#input-title')
@@ -15,6 +14,7 @@ var favIdea = document.querySelector('.icon-star')
 var showStarredIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
+window.addEventListener('load', displayStoredIdeas)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
@@ -68,17 +68,8 @@ function createCardFromTemplate(userIdea) {
 
   userIdeas.appendChild(ideaCard)
   clearInputFields()
+  newIdea.saveToStorage()
 }
-
-// function addStar(id) {
-//   // var cardToStar = event.target.id
-//   for (i = 0; i < ideas.length; i++) {
-//     if(ideas[i].id == id) {
-//       ideas[i].star = true;
-//       starredIdeas.push(ideas[i]);
-//     }
-//   }
-// }
 
 function toggleStarred(event) {
   // change card.star to true
@@ -96,9 +87,8 @@ function toggleStarred(event) {
     event.target.src = './assets/star.svg'
   } else {
     event.target.parentElement.parentElement.classList.add('starred')
-    event.target.src = './assets/star-active.svg'
+    // event.target.src = './assets/star-active.svg'
   }
-
   // if (event.target.src.includes('/assets/star.svg')) { // includes rather than === explanation
   //   event.target.src = './assets/star-active.svg'
   // } else {
@@ -131,53 +121,34 @@ function toggleIdeasDisplay() {
   // add show-starred-ideas class to user-ideas
   userIdeas.classList.toggle('show-starred-ideas')
   // change button innertext to say 'show all ideas'
-
 }
 
-// function saveCardToLocalStorage (currentIdea) {
-  // currentIdea.saveToStorage();
-  // var ideasString = JSON.stringify(ideas);
-  // localStorage.setItem('storedCards', ideas)
-  // localStorage.setItem('savedCards', savedCard);
-// }
+function displayStoredIdeas() {
+  var parsedIdeas = JSON.parse(localStorage.getItem('saved-cards'))
+  ideas = parsedIdeas
 
-// function deleteCardFromLocalStorage() {
-  //remove card from ideas array
-  //remove card from fav ideas array
-// }
+  createCardsFromStorage()
+  checkStarred()
+}
 
-// function showStarredIdeas() {
-//     userIdeas.innerText = "";
-  //figure out how to refresh page and keep the array displayed
-  // for (var i = 0; i < ideas.length; i++) {
-  //   if(ideas[i].star === true) {
-  //     var starredIdea = localStorage.getItem(`${ideas[i].id}`);
-  //     var starredItem = JSON.parse(starredIdea);
-  //     starredIdeas.push(starredItem);
-  //   }
-  // }
-//   displayStarredIdeas();
-//   showStarredIdeasButton.classList.add('hidden');
-//   showAllIdeasButton.classList.remove('hidden');
-// }
+function createCardsFromStorage() {
+  for (var i = 0; i < ideas.length; i++) {
+    var ideaCard = ideaCardTemplate.content.cloneNode(true)
+    addTitleToTemplate(ideaCard, ideas[i].title)
+    addBodyToTemplate(ideaCard, ideas[i].body)
+    addIdToTemplate(ideaCard, ideas[i].id)
 
-// function displayStarredIdeas() {
-//   userIdeas.innerText = "";
-//   for (var i = 0; i < starredIdeas.length; i++) {
-//     createCardFromTemplate(starredIdeas[i]);
-//     //add/hide class for icon active/ hidden?
-//   }
-// }
-//
-// function showAllIdeas() {
-//   userIdeas.innerText = "";
-//   showStarredIdeasButton.classList.remove('hidden');
-//   showAllIdeasButton.classList.add('hidden');
-//
-//   for (var i = 0; i < ideas.length; i++) {
-//     createCardFromTemplate(ideas[i]);
-//   }
-// }
+    userIdeas.appendChild(ideaCard)
+  }
+}
+
+function checkStarred() {
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].star) {
+      document.getElementById(`${ideas[i].id}`).classList.add('starred')
+    }
+  }
+}
 
 function addTitleToTemplate(card, userTitle) {
   card.querySelector('div.card-body h3').innerText = userTitle

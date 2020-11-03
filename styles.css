@@ -96,15 +96,15 @@ input {
   display: none;
 }
 
-.icon-delete:hover{
+.icon-delete:hover {
   content: url('./assets/delete-active.svg');
   cursor: pointer;
 }
 
-/* .icon-star:hover{
-  content: url('./assets/star-active.svg');
+.icon-star:hover {
+  /* content: url('./assets/star-active.svg'); */
   cursor: pointer;
-} */
+}
 
 .idea-card {
   background-color: #FFFFFF;
@@ -144,9 +144,9 @@ input {
   display: none;
 }
 
-/* .starred .icon-star {
-  content: url()
-} */
+.starred .icon-star {
+  content: url('./assets/star-active.svg')
+}
 
 .user-form {
   background-color: #A9AAD2;

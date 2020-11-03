@@ -12,7 +12,6 @@ class Idea {
   }
 
   deleteFromStorage() {
-    // this.star = false
     // remove from localStorage
 
   }
