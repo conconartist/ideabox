@@ -22,7 +22,7 @@ showStarredIdeasButton.addEventListener('click', toggleIdeasDisplay)
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
-    removeCardFromDisplay(event.target.id)
+    removeCardFromDisplay(event.target.getAttribute('data-card-id'))
     // event.target.getAttribute('name')
     removeCardFromArray()
   }
@@ -102,7 +102,7 @@ function removeCardFromDisplay(id) {
 }
 
 function removeCardFromArray() {
-  var deleteIdea = event.target.id
+  var deleteIdea = event.target.getAttribute('data-card-id')
 
   for (var i = 0; i < ideas.length; i++) {
     if (deleteIdea == ideas[i].id) {
@@ -124,11 +124,13 @@ function toggleIdeasDisplay() {
 }
 
 function displayStoredIdeas() {
-  var parsedIdeas = JSON.parse(localStorage.getItem('saved-cards'))
-  ideas = parsedIdeas
+  if (localStorage.getItem('saved-cards')) {
+    var parsedIdeas = JSON.parse(localStorage.getItem('saved-cards'))
+    ideas = parsedIdeas
 
-  createCardsFromStorage()
-  checkStarred()
+    createCardsFromStorage()
+    checkStarred()
+  }
 }
 
 function createCardsFromStorage() {
@@ -160,8 +162,8 @@ function addBodyToTemplate(card, userBody) {
 
 function addIdToTemplate(card, cardId) {
   card.querySelector('section.idea-card').id = cardId
-  card.querySelector('img.icon-delete').id = cardId
-  card.querySelector('img.icon-star').id = cardId
+  card.querySelector('img.icon-delete').setAttribute('data-card-id', cardId)
+  card.querySelector('img.icon-star').setAttribute('data-card-id', cardId)
 
   // element.setAttribute('name', value)
   // name = 'data-card-id'
