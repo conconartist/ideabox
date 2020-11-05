@@ -44,6 +44,7 @@ Create functionality for a website that allows a user to save ideas with a title
 * You can filter the displayed cards by entering text into the Search ideas field. Only the cards that match your search will be displayed.
 * Upon refreshing the website, the page should remain the same. The saved cards and display state will be unchanged.
 
+![Searching Ideas](https://media.giphy.com/media/mHrbHMgjtiZdBdS4Ea/giphy.gif)
 
 ## Contact information
 
