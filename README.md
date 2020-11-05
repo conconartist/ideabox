@@ -32,7 +32,7 @@ Create functionality for a website that allows a user to save ideas with a title
 * Go to the deployed page [here](https://conconartist.github.io/ideabox/)
 * Enter a Title and Body for your idea to enable the Save button
 * Click the Save button to see your idea displayed on a card in the space below the form
-
+<img src="/images/output/video1.gif" width="250" height="250"/>
 ![Adding Idea](https://media.giphy.com/media/3t4qzXGhceM1DPpQAO/giphy.gif)
 
 * Click on the Star logo on the idea card to add that idea to your favorites
