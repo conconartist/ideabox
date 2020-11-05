@@ -14,6 +14,7 @@ var deleteIdea = document.querySelector('.icon-delete')
 var showStarredIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
+
 window.addEventListener('load', displayStoredIdeas)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)

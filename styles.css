@@ -102,7 +102,6 @@ input {
 }
 
 .icon-star:hover {
-  /* content: url('./assets/star-active.svg'); */
   cursor: pointer;
 }
 
@@ -186,15 +185,6 @@ input {
   cursor: default;
 }
 
-#button-search {
-  background-color: #353567;
-  border-color: #5C5FA8;
-  color: #FFFFFF;
-  height: 1.4em;
-  padding: 0.5em;
-  width: 1.5em;
-}
-
 #button-starred, #button-all {
   background-color: #5356A4;
   border: none;
@@ -207,6 +197,15 @@ input {
   font-family: inherit;
   height: 5.5em;
   width: 100%;
+}
+
+#logo-search {
+  background-color: #353567;
+  border-color: #5C5FA8;
+  color: #FFFFFF;
+  height: 1.1em;
+  padding: 0.5em;
+  width: 1.1em;
 }
 
 #menu-bar-filter {

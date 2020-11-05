@@ -3,17 +3,15 @@ class Idea {
     this.id = Date.now();
     this.title = ideaTitle;
     this.body = ideaBody;
-    this.star = false;//if statement to true if favorited
+    this.star = false;
   }
 
   saveToStorage() {
-    var stringifiedCards = JSON.stringify(ideas)
-    localStorage.setItem('saved-cards', stringifiedCards)
+    // items stored to local storage through array rather than individually
   }
 
   deleteFromStorage() {
-    // remove from localStorage
-
+    // items deleted from local storage through array rather than individually
   }
 
   updateIdea(newTitle, newBody) {
