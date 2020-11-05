@@ -32,7 +32,6 @@ Create functionality for a website that allows a user to save ideas with a title
 * Go to the deployed page [here](https://conconartist.github.io/ideabox/)
 * Enter a Title and Body for your idea to enable the Save button
 
-![Desktop Layout](https://frontend.turing.io/projects/module-1/assets/ideabox-group/desktop.jpg)
 
 * Click the Save button to see your idea displayed on a card in the space below the form
 * Click on the Star logo on the idea card to add that idea to your favorites
