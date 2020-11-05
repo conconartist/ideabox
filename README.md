@@ -33,18 +33,18 @@ Create functionality for a website that allows a user to save ideas with a title
 * Enter a Title and Body for your idea to enable the Save button
 * Click the Save button to see your idea displayed on a card in the space below the form
 
-![Adding Idea](https://media.giphy.com/media/3t4qzXGhceM1DPpQAO/giphy.gif =200x)
+![Adding Idea](https://media.giphy.com/media/3t4qzXGhceM1DPpQAO/giphy.gif)
 
 * Click on the Star logo on the idea card to add that idea to your favorites
 * If you would like to delete an idea card, click on the 'X' logo on the card
 * To display only your starred (favorite) ideas, click on the Show Starred Ideas button in the menu bar on the left side of the website. To toggle back to displaying all of your ideas, click the Show All Ideas button
 
-![Favorite Idea](https://media.giphy.com/media/vpyJyVRMKsm1Gv7alN/giphy.gif =200x)
+![Favorite Idea](https://media.giphy.com/media/vpyJyVRMKsm1Gv7alN/giphy.gif)
 
 * You can filter the displayed cards by entering text into the Search ideas field. Only the cards that match your search will be displayed.
 * Upon refreshing the website, the page should remain the same. The saved cards and display state will be unchanged.
 
-![Searching Ideas](https://media.giphy.com/media/mHrbHMgjtiZdBdS4Ea/giphy.gif =200x)
+![Searching Ideas](https://media.giphy.com/media/mHrbHMgjtiZdBdS4Ea/giphy.gif)
 
 ## Contact information
 
