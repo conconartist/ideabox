@@ -7,10 +7,10 @@ var inputTitle = document.querySelector('#input-title')
 var inputBody = document.querySelector('#input-body')
 var userIdeas = document.querySelector('.user-ideas')
 var ideaCardTemplate = document.querySelector('#unique-card')
+var searchBarInput = document.querySelector('#input-search')
 
 var saveButton = document.querySelector('#button-save')
 var deleteIdea = document.querySelector('.icon-delete')
-var favIdea = document.querySelector('.icon-star')
 var showStarredIdeasButton = document.querySelector('#button-starred')
 
 // event listeners
@@ -18,23 +18,21 @@ window.addEventListener('load', displayStoredIdeas)
 saveButton.addEventListener('click', saveNewIdea)
 inputBody.addEventListener('keyup', setSaveButtonState)
 inputTitle.addEventListener('keyup', setSaveButtonState)
-showStarredIdeasButton.addEventListener('click', toggleIdeasDisplay)
+showStarredIdeasButton.addEventListener('click', toggleStarredIdeasDisplay)
+searchBarInput.addEventListener('keyup', searchIdeas)
+
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-delete') {
-    removeCardFromDisplay(event.target.id)
-    // event.target.getAttribute('name')
-    removeCardFromArray()
+    removeCard()
   }
-});
+})
 
 userIdeas.addEventListener('click', function(event) {
   if (event.target.className === 'icon-star') {
-    toggleStarred(event)
-    // addStar(event.target.id)
-    // event.target.getAttribute('name')
+    toggleStarred()
   }
-});
+})
 
 // functions
 
@@ -68,32 +66,37 @@ function createCardFromTemplate(userIdea) {
 
   userIdeas.appendChild(ideaCard)
   clearInputFields()
-  newIdea.saveToStorage()
+  updateLocalStorage()
 }
 
-function toggleStarred(event) {
-  // change card.star to true
+function toggleStarred() {
+  toggleStarProperty(event)
+  toggleStarIcon(event.target.parentElement.parentElement)
+  updateLocalStorage()
+}
 
+function toggleStarProperty(event) {
+  var iconAncestor = event.target.parentElement.parentElement
   for (var i = 0; i < ideas.length; i++) {
-    if (`${ideas[i].id}` === event.target.parentElement.parentElement.id) {
+    if (`${ideas[i].id}` === iconAncestor.id) {
       ideas[i].star = !ideas[i].star
     }
   }
+}
 
-  if (event.target.parentElement.parentElement.classList.contains('starred')) {
-    // add starred class to idea-card
-    event.target.parentElement.parentElement.classList.remove('starred')
-    // toggle star icon
+function toggleStarIcon(iconAncestor) {
+  if (iconAncestor.classList.contains('starred')) {
+    iconAncestor.classList.remove('starred')
     event.target.src = './assets/star.svg'
   } else {
-    event.target.parentElement.parentElement.classList.add('starred')
-    // event.target.src = './assets/star-active.svg'
+    iconAncestor.classList.add('starred')
   }
-  // if (event.target.src.includes('/assets/star.svg')) { // includes rather than === explanation
-  //   event.target.src = './assets/star-active.svg'
-  // } else {
-  //   event.target.src = './assets/star.svg'
-  // }
+}
+
+function removeCard() {
+  removeCardFromDisplay(event.target.getAttribute('data-card-id'))
+  removeCardFromArray()
+  updateLocalStorage()
 }
 
 function removeCardFromDisplay(id) {
@@ -102,7 +105,7 @@ function removeCardFromDisplay(id) {
 }
 
 function removeCardFromArray() {
-  var deleteIdea = event.target.id
+  var deleteIdea = event.target.getAttribute('data-card-id')
 
   for (var i = 0; i < ideas.length; i++) {
     if (deleteIdea == ideas[i].id) {
@@ -111,24 +114,70 @@ function removeCardFromArray() {
   }
 }
 
-function toggleIdeasDisplay() {
-  // when show starred ideas button is clicked:
+function searchIdeas() {
+  if (searchBarInput.value === "") {
+    userIdeas.classList.remove('show-search-ideas')
+  } else {
+    userIdeas.classList.add('show-search-ideas')
+    checkSearchInputField()
+  }
+}
+
+function checkSearchInputField() {
+  for (var i = 0; i < ideas.length; i++) {
+    var cardTitle = ideas[i].title.toLowerCase()
+    var cardBody = ideas[i].body.toLowerCase()
+    var inputField = searchBarInput.value.toLowerCase()
+    if (cardTitle.includes(inputField) || cardBody.includes(inputField)) {
+      document.getElementById(`${ideas[i].id}`).classList.add('search-includes')
+    } else {
+      document.getElementById(`${ideas[i].id}`).classList.remove('search-includes')
+    }
+  }
+}
+
+function toggleStarredIdeasDisplay() {
+  toggleButtonText()
+  toggleDisplayClass()
+  updateLocalStorage()
+}
+
+function toggleDisplayClass(){
+  userIdeas.classList.toggle('show-starred-ideas')
+}
+
+function toggleButtonText() {
   if (userIdeas.classList.contains('show-starred-ideas')) {
     showStarredIdeasButton.innerText = 'Show Starred Ideas'
   } else {
     showStarredIdeasButton.innerText = 'Show All Ideas'
   }
-  // add show-starred-ideas class to user-ideas
-  userIdeas.classList.toggle('show-starred-ideas')
-  // change button innertext to say 'show all ideas'
+}
+
+function updateLocalStorage() {
+  var stringifiedCards = JSON.stringify(ideas)
+  var starredButtonState = JSON.stringify(showStarredIdeasButton.innerText)
+  localStorage.setItem('saved-cards', stringifiedCards)
+  localStorage.setItem('starred-button', starredButtonState)
+}
+
+function displayButtonFromStorage() {
+  var parsedButtonState = JSON.parse(localStorage.getItem('starred-button'))
+  if (parsedButtonState === 'Show All Ideas') {
+    userIdeas.classList.add('show-starred-ideas')
+    showStarredIdeasButton.innerText = parsedButtonState
+  }
 }
 
 function displayStoredIdeas() {
-  var parsedIdeas = JSON.parse(localStorage.getItem('saved-cards'))
-  ideas = parsedIdeas
+  if (localStorage.getItem('saved-cards')) {
+    var parsedIdeas = JSON.parse(localStorage.getItem('saved-cards'))
+    ideas = parsedIdeas
 
-  createCardsFromStorage()
-  checkStarred()
+    createCardsFromStorage()
+    checkStarred()
+    displayButtonFromStorage()
+  }
 }
 
 function createCardsFromStorage() {
@@ -160,16 +209,6 @@ function addBodyToTemplate(card, userBody) {
 
 function addIdToTemplate(card, cardId) {
   card.querySelector('section.idea-card').id = cardId
-  card.querySelector('img.icon-delete').id = cardId
-  card.querySelector('img.icon-star').id = cardId
-
-  // element.setAttribute('name', value)
-  // name = 'data-card-id'
+  card.querySelector('img.icon-delete').setAttribute('data-card-id', cardId)
+  card.querySelector('img.icon-star').setAttribute('data-card-id', cardId)
 }
-//instead setting each item by id, set the whole array ideas, starred ideas
-//every time i create a card, uplaod to idea array, push to local saveToStorage
-//every time I star a card, upload to favorites array, push to local saveToStorage
-//any time you change the array, save to local saveToStorage
-//the only time you need to get the data is on page load
-//use if statement (if local storage exists, set array to local storage items), or default
-//to empty arrays
