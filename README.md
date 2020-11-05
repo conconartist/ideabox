@@ -31,10 +31,10 @@ Create functionality for a website that allows a user to save ideas with a title
 
 * Go to the deployed page [here](https://conconartist.github.io/ideabox/)
 * Enter a Title and Body for your idea to enable the Save button
+* Click the Save button to see your idea displayed on a card in the space below the form
 
 ![Adding Idea](https://media.giphy.com/media/3t4qzXGhceM1DPpQAO/giphy.gif)
 
-* Click the Save button to see your idea displayed on a card in the space below the form
 * Click on the Star logo on the idea card to add that idea to your favorites
 * If you would like to delete an idea card, click on the 'X' logo on the card
 * To display only your starred (favorite) ideas, click on the Show Starred Ideas button in the menu bar on the left side of the website. To toggle back to displaying all of your ideas, click the Show All Ideas button
